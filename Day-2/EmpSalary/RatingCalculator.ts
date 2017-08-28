@@ -7,7 +7,7 @@ export class RatingCalculator {
         empList.filter(emp => emp.getRating() < 5);
 
         const listOfEmployeeWithRatinggreaterthan5 = 
-        empList.filter(emp => emp.getRating() >= 5)
+        empList.filter(emp => emp.getRating() >= 5);
         // empList.filter(function(emp) {
         //     return emp.getRating() < 5;
         // })
