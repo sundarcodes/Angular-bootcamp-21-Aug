@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Todo } from './../models/todo';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-todo-list',
@@ -6,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./todo-list.component.css']
 })
 export class TodoListComponent implements OnInit {
+
+  @Input() todoList: Todo[];
+  @Input() title: string;
 
   constructor() { }
 

@@ -1,3 +1,5 @@
+import { TodoService } from './../services/todo.service';
+import { Todo } from './../models/todo';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,7 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  projectTodos: Todo[];
+  personalTodos: Todo[];
+
+  constructor(private todoService: TodoService) {
+    this.projectTodos = this.todoService.getTodoList()
+    .filter(todo => todo.type === 'project');
+    this.personalTodos = this.todoService.getTodoList()
+    .filter(todo => todo.type === 'personal');
+   }
 
   ngOnInit() {
   }
