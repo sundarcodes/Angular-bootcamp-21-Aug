@@ -18,4 +18,18 @@ export class TodoService {
       return this.todoList;
    }
 
+   addTodo(name: string, type: string, isDone: boolean = false) {
+     const newTodo = new Todo(name, isDone, type);
+     this.todoList.push(newTodo);
+     console.log(this.todoList);
+   }
+
+   getProjectTodos() {
+     return this.todoList.filter(todo => todo.type === 'project');
+   }
+
+   getPersonalTodos() {
+     return this.todoList.filter(todo => todo.type === 'personal');
+   }
+
 }

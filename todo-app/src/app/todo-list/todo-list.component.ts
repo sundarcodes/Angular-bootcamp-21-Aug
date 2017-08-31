@@ -1,5 +1,5 @@
 import { Todo } from './../models/todo';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output,EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-todo-list',
@@ -11,9 +11,15 @@ export class TodoListComponent implements OnInit {
   @Input() todoList: Todo[];
   @Input() title: string;
 
+  @Output() itemAdded: EventEmitter<string> = new EventEmitter();
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onEnterPress(text: string) {
+    this.itemAdded.emit(text);
   }
 
 }

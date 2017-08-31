@@ -1,7 +1,7 @@
 <h3>{{title}}</h3>
 
 <div class="input-field">
-      <input placeholder="What do you want to do"type="text">
+      <input placeholder="What do you want to do" type="text" #todoText (keyup.enter)="onEnterPress(todoText.value)">
       <!--<label for="first_name">Todo Task Name</label>-->
 </div>
 

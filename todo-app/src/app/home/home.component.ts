@@ -9,17 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  projectTodos: Todo[];
-  personalTodos: Todo[];
+  // projectTodos: Todo[];
+  // personalTodos: Todo[];
 
   constructor(private todoService: TodoService) {
-    this.projectTodos = this.todoService.getTodoList()
-    .filter(todo => todo.type === 'project');
-    this.personalTodos = this.todoService.getTodoList()
-    .filter(todo => todo.type === 'personal');
+    // this.projectTodos = this.todoService.getTodoList()
+    // .filter(todo => todo.type === 'project');
+    // this.personalTodos = this.todoService.getTodoList()
+    // .filter(todo => todo.type === 'personal');
    }
 
   ngOnInit() {
   }
 
+  addItemToList(todoText: string, type: string) {
+    console.log(todoText, type);
+    this.todoService.addTodo(todoText, type);
+  }
 }
