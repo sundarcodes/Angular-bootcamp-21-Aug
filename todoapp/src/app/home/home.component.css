@@ -1,0 +1,16 @@
+.home-container {
+    width: 70%;
+}
+.baseInput, .baseInput:focus, .baseInput:hover {
+    border: 0;
+    outline: none;
+    background: transparent;
+    border-bottom: 2px solid #ccc;
+    box-shadow: none;
+    border-radius: 0;
+}
+.baseInput:focus{
+    border-bottom: 2px solid #26a69a;
+}
+
+
