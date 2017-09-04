@@ -1,17 +1,10 @@
-<div class="input-field col s6">
-         <input placeholder="Placeholder" id="first_name" type="text" >
-     <label for="first_name">What to Do</label>
- </div><br><br>
-   <p>
+<h3>{{title}}</h3>
+<div class="input-field">
+         <input placeholder="What Do you want to do"  type="text" #itemText (keyup.enter)="onEnterPress(itemText.value)" >
+    
+ </div>
+   <p *ngFor = "let item of itemList">
     <input type="checkbox" id="test5" />
-     <label for="test5">Red</label>
-    </p>
-    <p>
-      <input type="checkbox" id="test5" checked="checked" />
-      <label for="test5">Yellow</label>
-    </p>
-    <p>
-      <input type="checkbox" class="test5" id="filled-in-box" checked="checked" />
-      <label for="test5">Filled in</label>
-    </p>
+     <label for="test5">{{item.name}}</label>
+   </p>
     
