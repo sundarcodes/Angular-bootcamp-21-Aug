@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { HomeComponentComponent } from './home-component/home-component.component';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { TodoListComponent } from './todo-list/todo-list.component';
     TodoListComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpModule
   ],
   providers: [TodoDataService],
   bootstrap: [AppComponent]
