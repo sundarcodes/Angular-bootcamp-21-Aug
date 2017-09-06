@@ -7,20 +7,13 @@ import { Todo } from '../model/todo.model';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-private personalTodoList:Todo[];
- private projectTodoList:Todo[];
+
   constructor(private todolistService:TodolistService) { }
 
   ngOnInit() {
-    this.personalTodoList=this.todolistService.getPersonalTodo();
-    this.projectTodoList=this.todolistService.getProjectTodo();
+   this.todolistService.getTodosList();
       }
 onaddtodo(text:string,type:string){
- if(type=='personal'){
-  this.personalTodoList.push(new Todo(text,type,false));
-}
-if(type=='project'){
-  this.projectTodoList.push(new Todo(text,type,false));
-}
+this.todolistService.onAdddTodo(text,type);
 }
 }

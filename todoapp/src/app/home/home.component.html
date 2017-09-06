@@ -1,10 +1,10 @@
 <div class="container home-container">
   <div class="row">
   <div class="col col-md-6">
-    <app-todolist [todoList]="personalTodoList" title="Personal Todo" (inputText)="onaddtodo($event,'personal')"></app-todolist>
+    <app-todolist [todoList]="todolistService.getPersonalTodo()" title="Personal Todo" (inputText)="onaddtodo($event,'personal')"></app-todolist>
    </div> 
    <div class="col col-md-6">
-     <app-todolist [todoList]="projectTodoList" title="Project Todo" (inputText)="onaddtodo($event,'project')"></app-todolist>
+     <app-todolist [todoList]="todolistService.getProjectTodo()" title="Project Todo" (inputText)="onaddtodo($event,'project')"></app-todolist>
    </div> 
   </div>
   </div>

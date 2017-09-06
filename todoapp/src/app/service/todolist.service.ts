@@ -1,17 +1,36 @@
 import { Injectable } from '@angular/core';
 import { Todo } from '../model/todo.model';
+import { Http,Response} from '@angular/http';
 @Injectable()
 export class TodolistService {
+  private baseUrl="https://todoapp-f9bc9.firebaseio.com/todoApp.json";
  private todolist:Todo[];
  private personalTodo:Todo[];
  private projectTodo:Todo[];
-  constructor() {
+  constructor(private http:Http) {
     this.todolist=[];
-    this.todolist.push(new Todo("pavan","project",false));
-    this.todolist.push(new Todo("pavan2","project",false));
-    this.todolist.push(new Todo("pavan3","personal",false));
-    this.todolist.push(new Todo("pavan4","personal",false));
-        }
+            }
+      
+   getTodosList(){
+this.http.get(this.baseUrl).subscribe(
+  (response:Response)=>{
+    const todoArray=[];
+  const jsObject= response.json();
+  for(let key in jsObject){
+    todoArray.push(jsObject[key]);
+  }
+ this.todolist = todoArray.map((todo:Todo)=>{
+    return new Todo(todo.name,todo.type,todo.status);
+  });
+
+  }
+)
+   }
+  public onAdddTodo(text:string,type:string){
+    this.http.post(this.baseUrl,new Todo(text,type,false)).subscribe(
+      (response)=>{console.log("sucess response"+" "+response);}
+    ,(error)=>{console.log("error reponse"+" "+error);})
+  }
 public getPersonalTodo(){
   this.personalTodo=this.todolist.filter(element=>element.type=='personal');
   return this.personalTodo;
