@@ -12,6 +12,7 @@ export class TodoService {
   constructor(private http: Http) {
     this.firebaseURL = 'https://my-todo-app-db25f.firebaseio.com/todos';
     this.todoList = [];
+    this.getTodoList();
     // this.todoList.push(new Todo('Learn Angular', false, 'personal'));
     // this.todoList.push(new Todo('Fix bug # 3434', false, 'project'));
     // this.todoList.push(new Todo('Attend scrum', false, 'project'));

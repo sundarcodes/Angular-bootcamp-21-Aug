@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.todoService.getTodoList();
+    // this.todoService.getTodoList();
   }
 
   addItemToList(todoText: string, type: string) {
