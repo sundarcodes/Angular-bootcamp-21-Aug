@@ -12,11 +12,11 @@ export class TodoService {
   constructor(private http: Http) {
     this.firebaseURL = 'https://my-todo-app-db25f.firebaseio.com/todos.json';
     this.todoList = [];
-    this.todoList.push(new Todo('Learn Angular', false, 'personal'));
-    this.todoList.push(new Todo('Fix bug # 3434', false, 'project'));
-    this.todoList.push(new Todo('Attend scrum', false, 'project'));
-    this.todoList.push(new Todo('Read a book', false, 'personal'));
-    this.todoList.push(new Todo('Do Exercise', false, 'personal'));
+    // this.todoList.push(new Todo('Learn Angular', false, 'personal'));
+    // this.todoList.push(new Todo('Fix bug # 3434', false, 'project'));
+    // this.todoList.push(new Todo('Attend scrum', false, 'project'));
+    // this.todoList.push(new Todo('Read a book', false, 'personal'));
+    // this.todoList.push(new Todo('Do Exercise', false, 'personal'));
    }
 
    getTodoList() {
@@ -32,16 +32,31 @@ export class TodoService {
         //   let obj = respObj[i];
         //   tempTodoArr.push(obj);
         // }
-        this.todoList = _.values(respObj).map((item: Todo) => {
-          return new Todo(item.name, item.isCompleted, item.type);
-        })
+        // for (let i = 0; i < Object.keys(respObj).length; i++) {
+        //   let obj1 = respObj[Object.keys(respObj)[i]];
+        //   console.log(obj1);
+        //   let newTodo = new Todo(Object.keys(respObj)[i], obj1.name, obj1.isCompleted, obj1.type);
+        //   this.todoList.push(newTodo);
+        // }
+
+        this.todoList = Object.keys(respObj)
+        .map(key => {
+          let obj = respObj[key];
+          return new Todo(key, obj.name, obj.isCompleted, obj.type)
+        });
+        console.log(this.todoList);
+
+        
+        // this.todoList = _.values(respObj).map((item: Todo) => {
+        //   return new Todo(item.name, item.isCompleted, item.type);
+        // })
       }, (err => {
         console.log('Error in fetching data from Firebase', err);
       }))
    }
 
    addTodo(name: string, type: string, isDone: boolean = false) {
-     const newTodo = new Todo(name, isDone, type);
+     const newTodo = new Todo('', name, isDone, type);
      this.http.post(this.firebaseURL, newTodo)
      .subscribe(data => {
       console.log('Success', data);
