@@ -12,6 +12,7 @@ export class TodoListComponent implements OnInit {
   @Input() title: string;
 
   @Output() itemAdded: EventEmitter<string> = new EventEmitter();
+  @Output() itemChecked: EventEmitter<string> = new EventEmitter();
 
   constructor() { }
 
@@ -21,5 +22,10 @@ export class TodoListComponent implements OnInit {
   onEnterPress(text: string) {
     this.itemAdded.emit(text);
   }
+
+  onClick(id: string) {
+    this.itemChecked.emit(id);
+  }
+
 
 }

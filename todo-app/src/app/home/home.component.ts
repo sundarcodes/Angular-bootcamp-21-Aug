@@ -24,7 +24,10 @@ export class HomeComponent implements OnInit {
   }
 
   addItemToList(todoText: string, type: string) {
-    console.log(todoText, type);
     this.todoService.addTodo(todoText, type);
+  }
+
+  markItemAsDone(id: string) {
+    this.todoService.markItemAsCompleted(id);
   }
 }

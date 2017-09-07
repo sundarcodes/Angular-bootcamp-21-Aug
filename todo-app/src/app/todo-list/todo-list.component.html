@@ -6,6 +6,6 @@
 </div>
 
 <p *ngFor="let todo of todoList; let i=index;">
-      <input type="checkbox" id="{{todo.id}}" />
+      <input type="checkbox" id="{{todo.id}}" (click)="onClick(todo.id)" />
       <label for="{{todo.id}}">{{todo.name}}</label>
     </p>

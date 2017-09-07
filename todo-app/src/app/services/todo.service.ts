@@ -10,7 +10,7 @@ export class TodoService {
   private todoList: Todo[];
   firebaseURL: string;
   constructor(private http: Http) {
-    this.firebaseURL = 'https://my-todo-app-db25f.firebaseio.com/todos.json';
+    this.firebaseURL = 'https://my-todo-app-db25f.firebaseio.com/todos';
     this.todoList = [];
     // this.todoList.push(new Todo('Learn Angular', false, 'personal'));
     // this.todoList.push(new Todo('Fix bug # 3434', false, 'project'));
@@ -21,7 +21,7 @@ export class TodoService {
 
    getTodoList() {
       // return this.todoList;
-      this.http.get(this.firebaseURL)
+      this.http.get(this.firebaseURL + '.json')
       .subscribe(respData => { 
         console.log(respData.json());
         const respObj = respData.json();
@@ -44,7 +44,7 @@ export class TodoService {
           let obj = respObj[key];
           return new Todo(key, obj.name, obj.isCompleted, obj.type)
         });
-        console.log(this.todoList);
+        // console.log(this.todoList);
 
         
         // this.todoList = _.values(respObj).map((item: Todo) => {
@@ -57,7 +57,7 @@ export class TodoService {
 
    addTodo(name: string, type: string, isDone: boolean = false) {
      const newTodo = new Todo('', name, isDone, type);
-     this.http.post(this.firebaseURL, newTodo)
+     this.http.post(this.firebaseURL + '.json', newTodo)
      .subscribe(data => {
       console.log('Success', data);
       this.todoList.push(newTodo); 
@@ -76,11 +76,31 @@ export class TodoService {
    }
 
    getProjectTodos() {
-     return this.todoList.filter(todo => todo.type === 'project');
+     return this.todoList.filter(todo => todo.type === 'project' && !todo.isCompleted);
    }
 
    getPersonalTodos() {
-     return this.todoList.filter(todo => todo.type === 'personal');
+     return this.todoList.filter(todo => todo.type === 'personal' && !todo.isCompleted);
+   }
+
+   getArchivedTodos() {
+     return this.todoList.filter(todo => todo.isCompleted)
+   }
+
+   markItemAsCompleted(id: string) {
+    let todoObj = this.fetchTodoForId(id);
+    todoObj.isCompleted = true;
+    // this.http.put(this.firebaseURL + '/' + id + '.json', todoObj)
+    this.http.put(`${this.firebaseURL}/${id}.json`, todoObj)
+    .subscribe(res => console.log(res));
+    // console.log(todoObj);
+   }
+
+   fetchTodoForId(id: string) {
+     return this.todoList.find(todo => todo.id === id);
+    //  this.todoList.find(function(todo) {
+    //    return todo.id === id;
+    //  })
    }
 
 }
