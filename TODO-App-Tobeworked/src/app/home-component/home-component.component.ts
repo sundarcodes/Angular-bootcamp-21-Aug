@@ -11,10 +11,10 @@ export class HomeComponentComponent implements OnInit {
   constructor(private TodoDataService: TodoDataService) { }
 
   ngOnInit() {
-    debugger;
+    
     var abc = this.TodoDataService.getTodoList();
     console.log(abc);
-    debugger;
+  
   }
 
 }

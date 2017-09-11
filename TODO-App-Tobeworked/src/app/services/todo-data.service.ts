@@ -4,7 +4,7 @@ import { Http} from '@angular/http';
 import * as _ from 'lodash';
 @Injectable()
 export class TodoDataService {
-  firebaseUrl : string =  "https://myapp-afa97.firebaseio.com/todo.json";
+  firebaseUrl : string =  "https://tododemo-6ab8f.firebaseio.com/working.json";
  private toDoValues:  todo[]; 
   constructor(private _http: Http) {
   this.toDoValues = [];
@@ -18,21 +18,25 @@ export class TodoDataService {
    }
    getTodoList(){
     //return this.toDoValues;
-    debugger;
-    this._http.get(this.firebaseUrl)
+    
+     this._http.get(this.firebaseUrl)
     .subscribe(myresp =>{
-
-      const resObj = myresp.json();
-      this.toDoValues = _.values(resObj).map((data:todo)=>{
-        console.log('TODO',this.toDoValues);
-        return new todo(data.name,data.type,data.isDone);
+     const resObj = myresp.json();
+    //  this.toDoValues = _.values(resObj).map((data:todo)=>{
+    //  console.log('TODO',this.toDoValues);
+    //  return new todo(data.id,data.name,data.type,data.isDone);
        
-      })
- 
-      
-    });
+    //   })
 
- 
+   console.log(resObj);
+    console.log(Object.keys(resObj));
+    for(let i=0;i<Object.keys(resObj).length;i++){
+      let obj1 = resObj[Object.keys(resObj)[i]];
+      console.log(obj1);
+      let newTodo = new todo(Object.keys(resObj)[i],obj1.name,obj1.type,obj1.isDone)
+      this.toDoValues.push(newTodo);
+    }
+    });
 
    }
    getProjectTodos(){
@@ -43,8 +47,8 @@ export class TodoDataService {
     return this.toDoValues.filter(todo => todo.type === 'Personal');
 
    }
-   addTodo(name:string,type:string, isDone: boolean  ){
-    let  newTodo = new todo(name,type, isDone);
+   addTodo(id:string,name:string,type:string, isDone: boolean  ){
+    let  newTodo = new todo(id,name,type, isDone);
     //this.toDoValues.push(newTodo);
     //console.log(this.toDoValues);
   //  this._http.post(this.firebaseUrl,newTodo).subscribe((function(data){
