@@ -1,0 +1,16 @@
+.status-indicator {
+    border-right-style: solid;
+    padding-right: 15px;
+}
+
+.status-green {
+    border-right-color: green;
+}
+
+.status-amber {
+    border-right-color: darkorange;
+}
+
+.status-red {
+    border-right-color: red;
+}

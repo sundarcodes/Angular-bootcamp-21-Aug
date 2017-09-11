@@ -10,6 +10,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { HomeComponent } from './home/home.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { ArchiveComponent } from './archive/archive.component';
+import { StatusHighlighterDirective } from './status-highlighter.directive';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ArchiveComponent } from './archive/archive.component';
     NavBarComponent,
     HomeComponent,
     TodoListComponent,
-    ArchiveComponent
+    ArchiveComponent,
+    StatusHighlighterDirective
   ],
   imports: [
     BrowserModule,
