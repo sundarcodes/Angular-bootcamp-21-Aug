@@ -43,7 +43,7 @@ export class TodoService {
         this.todoList = Object.keys(respObj)
         .map(key => {
           let obj = respObj[key];
-          return new Todo(key, obj.name, obj.isCompleted, obj.type)
+          return new Todo(key, obj.name, obj.isCompleted, obj.type, obj.startDate, obj.endDate)
         });
         // console.log(this.todoList);
 
@@ -57,10 +57,11 @@ export class TodoService {
    }
 
    addTodo(name: string, type: string, isDone: boolean = false) {
-     const newTodo = new Todo('', name, isDone, type);
+     const newTodo = new Todo('', name, isDone, type, Date.now());
      this.http.post(this.firebaseURL + '.json', newTodo)
-     .subscribe(data => {
-      console.log('Success', data);
+     .subscribe(rsp => {
+      console.log('Success', rsp);
+      newTodo.id = rsp.json().name;
       this.todoList.push(newTodo); 
       console.log(this.todoList);
      }, (err => {
@@ -91,6 +92,7 @@ export class TodoService {
    markItemAsCompleted(id: string) {
     let todoObj = this.fetchTodoForId(id);
     todoObj.isCompleted = true;
+    todoObj.endDate = Date.now();
     // this.http.put(this.firebaseURL + '/' + id + '.json', todoObj)
     this.http.put(`${this.firebaseURL}/${id}.json`, todoObj)
     .subscribe(res => console.log(res));
