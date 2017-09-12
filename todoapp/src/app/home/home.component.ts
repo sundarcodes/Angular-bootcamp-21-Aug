@@ -13,7 +13,10 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
    this.todolistService.getTodosList();
       }
-onaddtodo(text:string,type:string){
+onaddtodo(text,type){
 this.todolistService.onAdddTodo(text,type);
+}
+onItemChecked(id){
+  this.todolistService.markItemAsCompleted(id);
 }
 }

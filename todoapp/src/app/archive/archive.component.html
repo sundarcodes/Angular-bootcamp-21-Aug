@@ -3,18 +3,18 @@
 <div class="inner-addon left-addon">
   <input type="text" class="search-query span2" placeholder="Search&hellip;">
 </div>
-<div class="card">
-  <div class="card-block">
+<div class="card" *ngFor="let todo of todoService.getArchivedTodos()">
+  <div class="card-block" >
     <div class="card-block-content">
-        <h4 class="card-title">design discussion</h4>
+        <h4 class="card-title">{{todo.name}}</h4>
         <div class="card-dates">
           <div class="card-dates-left d-inline-block pull-left"><span class="card-icon"><i class="fa fa-hourglass-o" aria-hidden="true"></i></span><span class="card-subtitle">May11,2017</span></div>
           <div class="card-dates-right d-inline-block pull-right"><span class="card-icon"><i class="fa fa-hourglass" aria-hidden="true"></i></span><span class="card-subtitle mb-2 text-muted">May11,2017</span></div>
         </div>
     </div>
     <div class="card-links clearfix"> 
-      <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a>
+      <a routerLink="/home" class="card-link"(click)="onRollBack(todo.id)">Roll back</a>
+      <a routerLink="/archive" class="card-link"(click)="onCrash(todo.id)">Crash</a>
     </div>
   </div>
 </div>
