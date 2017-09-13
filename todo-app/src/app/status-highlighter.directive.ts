@@ -10,11 +10,11 @@ export class StatusHighlighterDirective implements OnInit{
 @Input() todo: Todo;
 
  constructor(private el: ElementRef, private renderer: Renderer2) {
-    console.log('In directive');
+    // console.log('In directive');
    }
 
   ngOnInit(){
-    console.log(this.todo);
+    // console.log(this.todo);
     let classToBeAdded = '';
     switch(this.getElapsedDays(this.todo.startDate)) {
       case 0:

@@ -2,19 +2,19 @@
   <div class="col s12">
     <div class="row">
       <div class="input-field col s12">
-        <input type="text" id="autocomplete-input" class="autocomplete">
-        <label for="autocomplete-input">Autocomplete</label>
+        <input type="text" id="autocomplete-input" #search class="autocomplete" (keyup)="onKeyUp(search.value)">
+        <label for="autocomplete-input"></label>
       </div>
     </div>
   </div>
- <div class="col s12 m7" *ngFor="let todo of todoService.getArchivedTodos()">
+ <div class="col s12 m7" *ngFor="let todo of filteredArchiveList$ | async">
     <div class="card horizontal">
       <div class="card-stacked">
         <div class="card-content">
           <p>{{todo.name}}</p>
         </div>
         <div class="card-action">
-          <a href="#">This is a link</a>
+          <a href="#">Trash</a>
         </div>
       </div>
     </div>

@@ -3,31 +3,33 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 
 import * as _ from 'lodash';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class TodoService {
 
   private todoList: Todo[];
+  private todoListSub: BehaviorSubject<Todo[]>;
+  public todoList$: Observable<Todo[]>;
+  public archiveTodo$: Observable<Todo[]>;
   firebaseURL: string;
   constructor(private http: Http) {
     this.firebaseURL = 'https://my-todo-app-db25f.firebaseio.com/todos';
     this.todoList = [];
     this.getTodoList();
-    // this.todoList.push(new Todo('Learn Angular', false, 'personal'));
-    // this.todoList.push(new Todo('Fix bug # 3434', false, 'project'));
-    // this.todoList.push(new Todo('Attend scrum', false, 'project'));
-    // this.todoList.push(new Todo('Read a book', false, 'personal'));
-    // this.todoList.push(new Todo('Do Exercise', false, 'personal'));
+    this.todoListSub = new BehaviorSubject([]);
+    this.todoList$ = this.todoListSub.asObservable();
+    // this.archiveTodo$ = this.todoList$.flatMap(todoList => Observable.of(todoList.filter(todo => todo.isCompleted)));
    }
 
    getTodoList() {
       // return this.todoList;
       this.http.get(this.firebaseURL + '.json')
       .subscribe(respData => { 
-        console.log(respData.json());
         const respObj = respData.json();
         const tempTodoArr = [];
-        console.log(_.values(respObj));
+        // console.log(_.values(respObj));
 
         // for key in respObj {
         //   let obj = respObj[i];
@@ -45,6 +47,7 @@ export class TodoService {
           let obj = respObj[key];
           return new Todo(key, obj.name, obj.isCompleted, obj.type, obj.startDate, obj.endDate)
         });
+        this.todoListSub.next(this.todoList);
         // console.log(this.todoList);
 
         
@@ -60,10 +63,11 @@ export class TodoService {
      const newTodo = new Todo('', name, isDone, type, Date.now());
      this.http.post(this.firebaseURL + '.json', newTodo)
      .subscribe(rsp => {
-      console.log('Success', rsp);
+      // console.log('Success', rsp);
       newTodo.id = rsp.json().name;
       this.todoList.push(newTodo); 
-      console.log(this.todoList);
+      this.todoListSub.next(this.todoList);
+      // console.log(this.todoList);
      }, (err => {
        console.log('Error occured', err);
      }))
@@ -96,6 +100,7 @@ export class TodoService {
     // this.http.put(this.firebaseURL + '/' + id + '.json', todoObj)
     this.http.put(`${this.firebaseURL}/${id}.json`, todoObj)
     .subscribe(res => console.log(res));
+    this.todoListSub.next(this.todoList);
     // console.log(todoObj);
    }
 
