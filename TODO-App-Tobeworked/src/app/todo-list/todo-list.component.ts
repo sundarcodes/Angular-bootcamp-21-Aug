@@ -10,12 +10,17 @@ export class TodoListComponent implements OnInit {
  @Input() itemList :  todo[];
  @Input() title : string;
  @Output() newItemAdded: EventEmitter<String> = new EventEmitter();
+ @Output() showId: EventEmitter<String> = new EventEmitter();
   constructor() { }
 
   ngOnInit() {
   }
   onEnterPress(text){
      this.newItemAdded.emit(text);
+  }
+  selectId(id: string){
+ 
+     this.showId.emit(id);
   }
 
 }

@@ -4,7 +4,7 @@
     
  </div>
    <p *ngFor = "let item of itemList; let i = index" >
-    <input #check type="checkbox" [id]=i />{{i}}{{check.id}}
-     <label for={{i}}>{{item.name}}</label>
+    <input #check type="checkbox" [id]= item.id  (click)="selectId(item.id)"/>{{item.id}}
+     <label for={{item.id}}>{{item.name}}</label>
    </p>
     
