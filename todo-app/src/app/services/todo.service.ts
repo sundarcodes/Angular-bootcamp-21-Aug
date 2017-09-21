@@ -4,6 +4,7 @@ import { Http } from '@angular/http';
 
 import * as _ from 'lodash';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
@@ -94,7 +95,8 @@ export class TodoService {
    }
 
    markItemAsCompleted(id: string) {
-    let todoObj = this.fetchTodoForId(id);
+    // let todoObj = this.fetchTodoForId(id);
+    let todoObj = this.todoList.find(todo => todo.id === id);
     todoObj.isCompleted = true;
     todoObj.endDate = Date.now();
     // this.http.put(this.firebaseURL + '/' + id + '.json', todoObj)

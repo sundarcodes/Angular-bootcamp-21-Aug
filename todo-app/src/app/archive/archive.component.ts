@@ -22,17 +22,24 @@ export class ArchiveComponent implements OnInit {
   searchVal: Subject<string>;
   filteredArchiveList$: Observable<Todo[]>;
   subs: any;
+  filteredList: Todo[];
 
   constructor(private todoService: TodoService) { 
     this.searchVal = new Subject(); 
+    this.filteredList = [];
   }
 
   ngOnInit() {
     this.filteredArchiveList$ = this.todoService.todoList$
-    .combineLatest(this.searchVal.startWith('').debounceTime(300), (list, searchVal) => {
+    .combineLatest(this.searchVal.startWith('').debounceTime(800), (list, searchVal) => {
       // console.log(list, searchVal);
+      console.log(list);
       return list.filter( todo => todo.name.includes(searchVal))
     })
+
+    // this.subs = this.filteredArchiveList$.subscribe(data => {
+    //   this.filteredList = data;
+    // })
    
 
         // this.todoService.getTodoList();
@@ -54,7 +61,7 @@ export class ArchiveComponent implements OnInit {
   }
 
   ngOnDestroy(){
-    // this.subs.unsubscribe();
+    if (this.subs) this.subs.unsubscribe();
   }
 
 }
