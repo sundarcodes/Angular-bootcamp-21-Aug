@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
   // projectTodos: Todo[];
   // personalTodos: Todo[];
 
-  constructor(private todoService: TodoService) {
+  constructor(public todoService: TodoService) {
     // this.projectTodos = this.todoService.getTodoList()
     // .filter(todo => todo.type === 'project');
     // this.personalTodos = this.todoService.getTodoList()
