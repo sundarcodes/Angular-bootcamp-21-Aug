@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Print Array</title>
+
+</head>
+<body>
+    <!--duplicate elimination-->
+    <div>
+    <h3>Without duplicates</h3>
+    <textarea  rows="100" cols="10" id="ansValue"></textarea>
+    </div>
+    <!--print all numbers vertically-->
+     <div>
+         <h3>With duplicates</h3>
+    <textarea  rows="100" cols="10" id="ansTxt"></textarea>
+     </div>
+  <script>
+    var temp = [];
+    var ans= "";
+    var ansVert = "";
+    var ValueArr =[1, 2, 3, 5, 8, 4, 7, 9, 1, 4, 12, 5, 6, 5, 2, 1, 0, 8, 1];
+
+    for(var i=0;i<ValueArr.length; i++){
+        if(temp.indexOf(ValueArr[i]) == -1){
+            temp.push(ValueArr[i]);
+            ans += '"'+ValueArr[i]+'"' +"\n";
+        }
+        ansVert +='"'+ ValueArr[i] +'"' +"\n"
+    }
+
+    document.getElementById("ansValue").value = ans;
+    document.getElementById("ansTxt").value = ansVert;
+  </script>
+
+</body>
+</html>
+
+
+
+

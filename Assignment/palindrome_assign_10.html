@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Palindrome</title>
+
+</head>
+<body>
+<script>
+    var revStr= "";
+    var ans ="";
+    var str =["Malayalam", "tree", "boat", "civic", "melt", "level"];
+    for(var i = 0 ; i<str.length ; i++) {
+        revStr = "";
+        var str1 = str[i];
+        for (var j = str1.length;j > 0; j--) {
+            revStr += str1.charAt(j-1);
+        }
+        if (str1.toLocaleLowerCase() == revStr.toLocaleLowerCase()) {
+            ans += '"'+str1+'"'+ ","
+        }
+    }
+    document.write(ans);
+</script>
+</body>
+</html>
