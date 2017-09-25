@@ -1,0 +1,14 @@
+
+      <h1>{{title}}</h1>
+      
+        <div class="form-group ">  
+          <input placeholder="What do you want to do" class="form-control baseInput" type="text" #todo (keyup.enter)="onKeyEnter(todo.value);todo.value='';"> 
+        </div>
+        <div class="form-check" *ngFor="let todo of todoList">
+          <label class="form-check-label">
+            <input class="form-check-input" id="{{todo.id}}" type="checkbox"  (click)="onClick(todo.id)">
+            {{todo.name}}
+          </label>
+        </div>
+        
+    

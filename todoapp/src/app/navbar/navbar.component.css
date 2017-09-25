@@ -1,0 +1,13 @@
+.navbar{
+    background-color:#ee6e73;
+}
+.navbar-default .navbar-brand,
+.navbar-default .navbar-nav>li>a{
+    color: #FFF;
+   
+
+}
+a.navbar-brand {
+    padding-left: 0;
+    font-size: 32px;
+}
